@@ -15,9 +15,9 @@ var Service = React.createClass({
     render: function(){
       return (
         <div className="col-sm-3 col-lg-3">
-          <div className="dash-unit">
-            <h1>{this.props.serv.name}</h1>
-            <h3><ServiceGlobalStatus executors={this.props.serv.executors} /></h3>
+          <div className="half-unit">
+            <ServiceGlobalStatus executors={this.props.serv.executors} />
+            <dtitle>{this.props.serv.name}</dtitle>
           </div>
         </div>
         );

@@ -23,7 +23,7 @@ var ServiceGlobalStatus = React.createClass({
     }
 
     return (
-        <span>{res}</span>
+        <i className={res}></i>
     );
   }
 

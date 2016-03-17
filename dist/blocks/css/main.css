@@ -159,7 +159,7 @@ h5 {
 /**********Half-Unit / Used in index.html**********/   
 .half-unit {		
 	margin-bottom: 30px;
-	padding-bottom: 4px;
+	/*padding-bottom: 4px;*/
 	border: 1px solid #383737;
 	background-image:url('../img/sep-half.png');
 	background-color: #3d3d3d;
@@ -176,7 +176,7 @@ h5 {
 }
 
 .half-unit dtitle {
-	font-size:10px;
+	font-size:15px;
 	text-transform:uppercase;
 	color:#ffffff;
 	margin:8px;
@@ -423,16 +423,23 @@ digiclock {
     height: 48px;
     width: 6px;
 }
-.framemail .window .mail li .OK {
+.half-unit i {
+    display: inline-block;
+    float:left;
+    height: 100%;
+    width: 6px;
+}
+
+.framemail .window .mail li .OK, .half-unit .OK {
     background-color: #B2C831;
 }
-.framemail .window .mail li .KO {
+.framemail .window .mail li .KO, .half-unit .KO {
     background: #FA1D2D;
 }
-.framemail .window .mail li .WARNING {
+.framemail .window .mail li .WARNING, .half-unit .WARNING {
     background: #FF6A00;
 }
-.framemail .window .mail li .NONE {
+.framemail .window .mail li .NONE, .half-unit .NONE {
     background: #DDDDDD;
 }
 .framemail .window .mail li img {
