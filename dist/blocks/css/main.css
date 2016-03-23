@@ -78,7 +78,7 @@ h5 {
 	color:#ffffff;
 	margin:8px;
 	padding:0px;
-	height:inherit	
+	height:inherit;	
 	}
 	
 .dash-unit hr {
@@ -179,9 +179,9 @@ h5 {
 	font-size:15px;
 	text-transform:uppercase;
 	color:#ffffff;
-	margin:8px;
+	margin:4px;
 	padding:0px;
-	height:inherit	
+	display:block;	
 	}
 	
 .half-unit hr {
@@ -272,8 +272,11 @@ h5 {
      -moz-box-shadow: 0px;
           box-shadow: 0px;
     background: none;
-    text-align: center;      
-	
+    text-align: center;      	
+}
+
+hr {
+  margin-bottom: 10px;
 }
 
 .modal-header {
@@ -423,23 +426,63 @@ digiclock {
     height: 48px;
     width: 6px;
 }
+
+span.serviceGlobalValue {
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+span.serviceGlobalValue .icon{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin-right: 4px;
+}
+
+span.serviceGlobalValue.noPic .icon{
+  display: none;
+}
+
+span.serviceGlobalValue.noText .value{
+  display: none;
+}
+
+span.serviceGlobalValue.version .icon{
+    background:url("/blocks/img/version.png") 0 0 no-repeat;
+}
+
+span.serviceGlobalValue.OK .icon{
+  background-position:0 0;
+}
+span.serviceGlobalValue.KO .icon{
+  background-position:-40px 0;
+}
+span.serviceGlobalValue.WARNING .icon{
+  background-position:-20px 0;
+}
+span.serviceGlobalValue.NONE .icon{
+  background-position:-60px 0;
+}
+
 .half-unit i {
     display: inline-block;
     float:left;
     height: 100%;
     width: 6px;
+    margin-right: 5px;
 }
-
-.framemail .window .mail li .OK, .half-unit .OK {
+.framemail .window .mail li .OK, .half-unit i.OK {
     background-color: #B2C831;
 }
-.framemail .window .mail li .KO, .half-unit .KO {
+.framemail .window .mail li .KO, .half-unit i.KO {
     background: #FA1D2D;
 }
-.framemail .window .mail li .WARNING, .half-unit .WARNING {
+.framemail .window .mail li .WARNING, .half-unit i.WARNING {
     background: #FF6A00;
 }
-.framemail .window .mail li .NONE, .half-unit .NONE {
+.framemail .window .mail li .NONE, .half-unit i.NONE {
     background: #DDDDDD;
 }
 .framemail .window .mail li img {

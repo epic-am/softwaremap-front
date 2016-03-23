@@ -8,9 +8,15 @@ var ServiceGlobalStatus = React.createClass({
 
     var executors = this.props.executors;
 
+    if ( !executors || executors.length == 0) { 
+      return (
+        <i className="KO"></i>
+      );
+    }
+
     for (var i=0; i < executors.length; i++) {
 
-      tempStatus = executors[i].metadata.status.toUpperCase();
+      tempStatus = executors[i].metadata["status"].toUpperCase();
 
       if (tempStatus === "DOWN" || tempStatus === "FAILURE") {
         res = "KO";

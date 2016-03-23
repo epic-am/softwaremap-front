@@ -8,8 +8,7 @@ var ServiceList = React.createClass({
     return { services: [] };
   },
 
-  componentDidMount: function(){
-
+  loadServicesFromServer: function(){
     // When the component loads, send a jQuery AJAX request
     var self = this;
 
@@ -27,6 +26,11 @@ var ServiceList = React.createClass({
         self.setState({ services: services });
       });
     })
+  },
+
+  componentDidMount: function(){
+    this.loadServicesFromServer();
+    setInterval(this.loadServicesFromServer, this.props.updateInterval);
   },
 
   pictureClick: function(id){
