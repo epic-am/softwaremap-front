@@ -28,7 +28,7 @@ var Service = React.createClass({
         }
       } else {
         value = "None";
-        status = "WARNING";
+        status = "NONE";
         break;
       }
     }
