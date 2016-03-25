@@ -1,6 +1,6 @@
 import React from 'react';
 
-var ServiceGlobalStatus = React.createClass({
+var ServiceGlobalHealth = React.createClass({
 
   render: function(){
     var res = "NONE";
@@ -35,4 +35,4 @@ var ServiceGlobalStatus = React.createClass({
 
 });
 
-export default ServiceGlobalStatus;
+export default ServiceGlobalHealth;

@@ -49,9 +49,7 @@ var CategoryList = React.createClass({
       services.forEach(function(service){
 
         var type = service.type;
-        debugger;
         if (!type) {
-          debugger;
           type = "Other";
         }
 

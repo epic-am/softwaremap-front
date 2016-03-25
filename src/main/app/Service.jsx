@@ -1,44 +1,37 @@
 import React from 'react';
 
-import ServiceGlobalStatus from './ServiceGlobalStatus.jsx';
+import ServiceGlobalHealth from './ServiceGlobalHealth.jsx';
 import ServiceGlobalValue from './ServiceGlobalValue.jsx';
+
+var VersionUtils = require('./utils/VersionUtils.jsx');
 
 var Service = React.createClass({
 
-  valueFromExecutors: function(property){
-    var value = "";
-    var status = "OK";
+  metadataFromExecutors: function(compareCallback){
+    var returnObject = {status: null, version: null};
 
     var executors = this.props.serv.executors;
 
     if ( !executors || executors.length == 0) {
-      return {"status": "KO", "value": "No data !"};
-    }
-
-    for (var i=0; i < executors.length; i++) {
-      var propValue = executors[i].metadata[property]; 
-      if (propValue) {
-        if (propValue !== value) {
-          if (value === "") {
-            value = propValue;
-          }  else {
-            value = value + ", " + propValue;
-            status = "WARNING";
-          }
-        }
-      } else {
-        value = "None";
-        status = "NONE";
-        break;
+      returnObject = {"status": "NONE", "value": "No data :("};
+    } else {
+      // TODO : extraire les status dans un component generic avec enum !
+      for (var i=0; i < executors.length; i++) {
+        returnObject = compareCallback.call(this, executors[i].metadata, returnObject);
       }
+
     }
 
-    return {"status": status, "value": value};
+    return returnObject;
+  },
+
+  versionRenderCallback: function(data) {
+    return data.version ? data.version : data;
   },
 
   // This component doesn't hold any state - it simply transforms
   // whatever was passed as attributes into HTML that represents a Service.
-  clickHandler: function(){
+  clickHandler: function() {
       // When the component is clicked, trigger the onClick handler that 
       // was passed as an attribute when it was constructed:
       this.props.onClick(this.props.serv.id);
@@ -48,10 +41,15 @@ var Service = React.createClass({
       return (
         <div className="col-sm-3 col-lg-3">
           <div className="half-unit">
-            <ServiceGlobalStatus executors={this.props.serv.executors} />
+            <ServiceGlobalHealth executors={this.props.serv.executors} />
+
             <dtitle>{this.props.serv.name}</dtitle>
             <hr/>
-            <ServiceGlobalValue data={this.valueFromExecutors("version")} iconType="version" />
+            <ServiceGlobalValue 
+              data={this.metadataFromExecutors(VersionUtils.takeValueIntoAccount)} 
+              renderCallback={this.versionRenderCallback} 
+              iconType="version" />
+            
           </div>
         </div>
         );
