@@ -452,6 +452,10 @@ span.serviceGlobalValue.noText .value{
 span.serviceGlobalValue.version .icon{
     background:url("/blocks/img/version.png") 0 0 no-repeat;
 }
+
+span.serviceGlobalValue.status {
+  float: right;
+}
 span.serviceGlobalValue.status .icon{
     background:url("/blocks/img/status.png") 0 0 no-repeat;
 }

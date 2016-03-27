@@ -4,22 +4,19 @@ import ServiceGlobalHealth from './ServiceGlobalHealth.jsx';
 import ServiceGlobalValue from './ServiceGlobalValue.jsx';
 
 var VersionUtils = require('./utils/VersionUtils.jsx');
+var StatusUtils = require('./utils/StatusUtils.jsx');
 
 var Service = React.createClass({
 
   metadataFromExecutors: function(compareCallback){
-    var returnObject = {status: null, version: null};
+    var returnObject;
 
     var executors = this.props.serv.executors;
 
     if ( !executors || executors.length == 0) {
       returnObject = {"status": "NONE", "value": "No data :("};
     } else {
-      // TODO : extraire les status dans un component generic avec enum !
-      for (var i=0; i < executors.length; i++) {
-        returnObject = compareCallback.call(this, executors[i].metadata, returnObject);
-      }
-
+      returnObject = compareCallback.call(this, executors);
     }
 
     return returnObject;
@@ -43,13 +40,18 @@ var Service = React.createClass({
           <div className="half-unit">
             <ServiceGlobalHealth executors={this.props.serv.executors} />
 
-            <dtitle>{this.props.serv.name}</dtitle>
+            <dtitle>
+              {this.props.serv.name}
+              <ServiceGlobalValue 
+                data={this.metadataFromExecutors(StatusUtils.sumUpDataCallback)} 
+                iconType="status noText" />
+            </dtitle>
             <hr/>
             <ServiceGlobalValue 
-              data={this.metadataFromExecutors(VersionUtils.takeValueIntoAccount)} 
+              data={this.metadataFromExecutors(VersionUtils.sumUpDataCallback)} 
               renderCallback={this.versionRenderCallback} 
               iconType="version" />
-            
+            <br/>
           </div>
         </div>
         );
