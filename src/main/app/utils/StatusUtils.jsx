@@ -31,7 +31,14 @@ export function globalStatus(executors) {
 
   for (var i=0; i < executors.length; i++) {
 
-    tempStatus = executors[i].metadata["status"].toUpperCase();
+    tempStatus = executors[i].metadata["status"];
+
+    if (!tempStatus) {
+      res = KO_STATUS;
+      break;
+    }
+    
+    tempStatus = tempStatus.toUpperCase();
 
     if (isStatusKo(tempStatus)) {
       res = KO_STATUS;
