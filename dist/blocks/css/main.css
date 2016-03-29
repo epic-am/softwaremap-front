@@ -280,11 +280,16 @@ hr {
 }
 
 .modal-header {
-	background-image:url('../img/sep-half.png');
-	background-color: #4f4f4f;
-	color:#fff;
+  background-image:url('../img/sep-half.png');
+  background-color: #4f4f4f;
+  color:#ffffff;
+  padding:10px;
 }
 
+.modal-footer {
+  padding:5px;
+  margin-top:5px;
+}
 
 input[type=submit] {
 	font-family: 'Open Sans', sans-serif;
@@ -373,58 +378,72 @@ digiclock {
 
 /**********Mail Style Configuration**********/   
 
-.framemail {
-    cursor: default;
+.modal {
+  cursor: default;
 }
-.framemail .window {
-    font-size: 0;
-    margin-top: -1px;
-    overflow: hidden;
-    margin-left: -18px;
+.modal-body {
+  margin-top: -1px;
+  overflow: hidden;
 }
-.framemail .window .mail li {
-    background-color:#3d3d3d;
-    background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.05));
-    background-image:    -moz-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.05));
-    background-image:     -ms-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.05));
-    background-image:      -o-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.05));
-    background-image:         linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.05));
-    border-top: 1px solid #888;
-    position: relative;
-    margin-left:-18px;
+.modal-body .mail li {
+  background-color:#3d3d3d;
+  background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.05));
+  background-image:    -moz-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.05));
+  background-image:     -ms-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.05));
+  background-image:      -o-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.05));
+  background-image:         linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.05));
+  border-top: 1px solid #888;
+  position: relative;
+  margin-left:-18px;
 }
-.framemail .window .mail li:first-child {
-    border-top: none;
+.modal-body .mail li:first-child {
+  border-top: none;
 }
-.framemail .window .mail li:hover {
-    background-color: #5d5b5b;
+.modal-body .mail li:hover {
+  background-color: #5d5b5b;
 }
-.framemail .window .mail li:after,
-.framemail .window .mail li:before {
-    border-left: 8px solid transparent;
-    border-top: 8px solid #df6;
-    content: '';
-    height: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 0;
+.modal-body .mail li:after,
+.modal-body .mail li:before {
+  border-left: 8px solid transparent;
+  border-top: 8px solid #df6;
+  content: '';
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
 }
-.framemail .window .mail li:before {
-    border-top-color: #bbb;
-    border-width: 9px;
+.modal-body .mail li:before {
+  border-top-color: #bbb;
+  border-width: 9px;
 }
-.framemail .window .mail li:nth-child(1):after,
-.framemail .window .mail li:nth-child(1):before {
-    border: none;
+.modal-body .mail li:nth-child(1):after,
+.modal-body .mail li:nth-child(1):before {
+  border: none;
 }
-.framemail .window .mail li:nth-child(2):after {
-    border-top-color: #fa1d2d;
+.modal-body .mail li:nth-child(2):after {
+  border-top-color: #fa1d2d;
 }
-.framemail .window .mail li i {
-    display: inline-block;
-    height: 48px;
-    width: 6px;
+.modal-body .mail li i {
+  display: inline-block;
+  height: 48px;
+  width: 6px;
+}
+
+
+/* New SoftwareMap Features */
+button.openExecutors {
+  background:url("/blocks/img/openModal.png") 0 0 no-repeat;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border:none;
+  position: absolute;
+  bottom: 35px;
+  right: 20px;
+}
+button.openExecutors:hover {
+  background-position:-20px 0;
 }
 
 span.serviceGlobalValue {
@@ -474,76 +493,76 @@ span.serviceGlobalValue.NONE .icon{
 }
 
 .half-unit i {
-    display: inline-block;
-    float:left;
-    height: 100%;
-    width: 6px;
-    margin-right: 5px;
+  display: inline-block;
+  float:left;
+  height: 100%;
+  width: 6px;
+  margin-right: 5px;
 }
-.framemail .window .mail li .OK, .half-unit i.OK {
-    background-color: #B2C831;
+.modal-body .mail li .OK, .half-unit i.OK {
+  background-color: #B2C831;
 }
-.framemail .window .mail li .KO, .half-unit i.KO {
-    background: #FA1D2D;
+.modal-body .mail li .KO, .half-unit i.KO {
+  background: #FA1D2D;
 }
-.framemail .window .mail li .WARNING, .half-unit i.WARNING {
-    background: #FF6A00;
+.modal-body .mail li .WARNING, .half-unit i.WARNING {
+  background: #FF6A00;
 }
-.framemail .window .mail li .NONE, .half-unit i.NONE {
-    background: #DDDDDD;
+.modal-body .mail li .NONE, .half-unit i.NONE {
+  background: #DDDDDD;
 }
-.framemail .window .mail li img {
-    background: #819da2;
-    border-radius: 2px;
-    height: 36px;
-    left: 12px;
-    position: absolute;
-    top: 6px;
-    width: 36px;
+.modal-body .mail li img {
+  background: #819da2;
+  border-radius: 2px;
+  height: 36px;
+  left: 12px;
+  position: absolute;
+  top: 6px;
+  width: 36px;
 }
-.framemail .window .mail li p {
-    font: 13px/24px sans-serif;
-    left: 56px;
-    position: absolute;
-    top: 3px;
+.modal-body .mail li p {
+  font: 13px/24px sans-serif;
+  left: 56px;
+  position: absolute;
+  top: 3px;
 }
-.framemail .window .mail li .sender {
-    color: #e9e8e8;
-    font-weight: bold;
-    text-shadow: 0 1px 1px hsla(0,0%,100%,.5);
+.modal-body .mail li .sender {
+  color: #e9e8e8;
+  font-weight: bold;
+  text-shadow: 0 1px 1px hsla(0,0%,100%,.5);
 }
-.framemail .window .mail li .message {
-    color: #999;
-    overflow: hidden;  
-    text-overflow: ellipsis;
-    top: 21px;  
-    white-space: nowrap;
+.modal-body .mail li .message {
+  color: #999;
+  overflow: hidden;  
+  text-overflow: ellipsis;
+  top: 21px;  
+  white-space: nowrap;
 }
-.framemail .window .mail li .message strong {
-    color: #999;
+.modal-body .mail li .message strong {
+  color: #999;
 }
-.framemail .window .mail li .actions {
-    height: 16px;
-    position: absolute;
-    right: 19px;
-    text-align: right;
-    top: 0;
-    width: 96px;
+.modal-body .mail li .actions {
+  height: 16px;
+  position: absolute;
+  right: 19px;
+  text-align: right;
+  top: 0;
+  width: 96px;
 }
-.framemail .window .mail li .actions img {
-    background: none;
-    display: inline-block;
-    height: 16px;
-    margin-left: 6px;
-    opacity: .1;
-    position: relative;
-    width: 16px;
+.modal-body .mail li .actions img {
+  background: none;
+  display: inline-block;
+  height: 16px;
+  margin-left: 6px;
+  opacity: .1;
+  position: relative;
+  width: 16px;
 }
-.framemail .window .mail li:hover .actions img {
-    opacity: .25;
+.modal-body .mail li:hover .actions img {
+  opacity: .25;
 }
-.framemail .window .mail li .actions img:hover {
-    opacity: .75;
+.modal-body .mail li .actions img:hover {
+  opacity: .75;
 }
 
 
