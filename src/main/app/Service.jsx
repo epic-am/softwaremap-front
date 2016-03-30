@@ -2,7 +2,7 @@ import React from 'react';
 
 import ServiceGlobalHealth from './ServiceGlobalHealth.jsx';
 import ServiceGlobalValue from './ServiceGlobalValue.jsx';
-import ExecutorList from './ExecutorList.jsx';
+import ServiceModal from './ServiceModal.jsx';
 
 var Modal = require('react-modal');
 
@@ -91,17 +91,7 @@ var Service = React.createClass({
             onRequestClose={this.closeModal}
             style={customStyles} >
    
-            <div className="modal-content">
-              <div className="modal-header">
-                Executors of {this.props.serv.name}
-              </div>
-              <div className="modal-body">
-                <ExecutorList executors={this.props.serv.executors} />
-              </div>
-              <div className="modal-footer">
-                <button onClick={this.closeModal}>close</button>
-              </div>
-            </div>
+            <ServiceModal serv={this.props.serv} />
           </Modal>
         </div>
       </div>
