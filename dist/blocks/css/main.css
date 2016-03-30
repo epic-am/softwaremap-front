@@ -176,18 +176,22 @@ h5 {
 }
 
 .half-unit dtitle {
-	font-size:15px;
-	text-transform:uppercase;
-	color:#ffffff;
-	margin:4px;
-	padding:0px;
-	display:block;	
-	}
+  font-size:15px;
+  text-transform:uppercase;
+  color:#ffffff;
+  margin:4px;
+  padding:0px;
+  display:block;
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 	
 .half-unit hr {
-  	border: 0;
-  	border-top: 1px solid #151515;
-  	border-top-style: dashed;
+  border: 0;
+  border-top: 1px solid #151515;
+  border-top-style: dashed;
 	margin-top:3px;
 }
 

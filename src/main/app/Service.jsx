@@ -70,20 +70,22 @@ var Service = React.createClass({
         <div className="half-unit">
           <ServiceGlobalHealth executors={this.props.serv.executors} />
 
-          <dtitle>
+          <dtitle title={this.props.serv.name}>
             {this.props.serv.name}
-            <ServiceGlobalValue 
-              data={this.metadataFromExecutors(StatusUtils.sumUpDataCallback)} 
-              iconType="status noText" />
           </dtitle>
           <hr/>
           <ServiceGlobalValue 
             data={this.metadataFromExecutors(VersionUtils.sumUpDataCallback)} 
             renderCallback={this.versionRenderCallback} 
             iconType="version" />
+
           <br/>
+
           <button onClick={this.openModal} className="openExecutors"/> 
-          
+          <ServiceGlobalValue 
+            data={this.metadataFromExecutors(StatusUtils.sumUpDataCallback)} 
+            iconType="status noText" />
+
           <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
