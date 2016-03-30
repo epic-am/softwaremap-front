@@ -5,7 +5,7 @@ var JSONAPIDeserializer = require('jsonapi-serializer').Deserializer;
 
 var CategoryList = React.createClass({
   getInitialState: function(){       
-    return { services: [] };
+    return { categoryMap: [] };
   },
 
   loadServicesFromServer: function(){
@@ -23,8 +23,34 @@ var CategoryList = React.createClass({
 
       new JSONAPIDeserializer().deserialize(result, function (err, jsonData) {
         var services=jsonData;
-        self.setState({ services: services });
+        //self.setState({ services: services });
+
+        var categoryMap=[];
+        var idTemp=1;
+
+        services.forEach(function(service){
+
+          var type = service.type;
+          if (!type) {
+            type = "Other";
+          }
+
+          if(categoryMap.some(elem => elem.type === type)) {
+            var category = categoryMap.find(elem => elem.type === type);
+            if(category) {
+              category.services.push(service);
+            }
+          } else {
+            categoryMap.push({type: type, services: [service], id: idTemp});
+            idTemp = idTemp + 1;
+          }     
+        });
+
+        self.setState({ categoryMap: categoryMap});
+
       });
+
+
     })
   },
 
@@ -36,39 +62,16 @@ var CategoryList = React.createClass({
 
   render: function() {
 
-    var services = this.state.services;
-
     var categories = <h1>Error while loading services.</h1>;
+    var categoryMap = this.state.categoryMap;
 
-    if (!services.length) {
-      services = <h1>Loading services...</h1>;
-    } else {
 
-      var categoryMap=[];
-
-      services.forEach(function(service){
-
-        var type = service.type;
-        if (!type) {
-          type = "Other";
-        }
-
-        if(categoryMap.some(elem => elem.type === type)) {
-          var category = categoryMap.find(elem => elem.type === type);
-          if(category) {
-            category.services.push(service);
-          }
-        } else {
-          var uid = type + Math.random().toString();
-          categoryMap.push({type: type, services: [service], id: uid});
-        }     
-      });
-
+    if (categoryMap !== null && categoryMap !== undefined) {
       categories = categoryMap.map(function(cat){
         return (
-          <div className="container">
+          <div className="container" key={cat.id}>
             <h1>{cat.type}</h1>
-            <ServiceList services={cat.services} key={cat.id} />
+            <ServiceList services={cat.services} key={cat.type} />
           </div>
         );
       });
