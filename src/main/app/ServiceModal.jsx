@@ -12,15 +12,14 @@ var ServiceModal = React.createClass({
             Executors of {this.props.serv.name}
           </div>
           <div className="modal-body">
-            <ExecutorList executors={this.props.serv.executors} />
+            <ExecutorList servId={this.props.serv.id} executors={this.props.serv.executors} />
           </div>
           <div className="modal-footer">
-            <button onClick={this.closeModal}>close</button>
+            <button onClick={this.props.closeCallback}>close</button>
           </div>
         </div>
     );
   }
-
 });
 
 export default ServiceModal;

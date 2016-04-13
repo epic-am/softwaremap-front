@@ -1,41 +1,55 @@
 var _ = require('lodash');
 
-export function sumUpDataCallback (executors) {
+var Constants = require('./Constants.jsx');
 
-  var value = null;
-  var status = null;
-  var metadata;
+export function extractGlobalVersionFromExecutors (executors) {
 
-// TODO : extraire les status dans un component generic avec enum !
-  for (var i=0; i < executors.length; i++) {
-    metadata = executors[i].metadata;
-    if (metadata) {
-      var propValue = metadata['version'];
+  if ( !executors || executors.length == 0) {
+    return {"status": Constants.NO_STATUS, "value": Constants.NO_VALUE};
+  } else {
 
-      if (propValue) {
-        if (value === null || value === undefined) {
-          value = propValue;
-          status = "OK";
-        } else if (!_.isEqual(propValue, value)) {
-          value = "Multiple values";
-          status = "WARNING";
+    var value = null;
+    var status = null;
+    var metadata;
+
+    for (var i=0; i < executors.length; i++) {
+      metadata = executors[i].metadata;
+      if (metadata) {
+        var propValue = metadata['version'];
+
+        if (propValue) {
+          if (value === null || value === undefined) {
+            value = propValue;
+            status = Constants.OK_STATUS;
+          } else if (!_.isEqual(propValue, value)) {
+            value = Constants.MULTIPLE_VALUE;
+            status = Constants.WARNING_STATUS;
+          }
+
+        } else {
+          if (value === null || value === undefined) {
+            value = Constants.NO_VALUE;
+            status = Constants.NO_STATUS;
+          } else {
+            value = Constants.KO_VALUE;
+            status = Constants.KO_STATUS;
+          }
         }
 
       } else {
-        if (value === null || value === undefined) {
-          value = "None";
-          status = "NONE";
-        } else {
-          value = "Error !";
-          status = "KO";
-        }
+        value = Constants.NO_VALUE;
+        status = Constants.KO_STATUS;
       }
-
-    } else {
-      value = "Error !";
-      status = "KO";
     }
+
+    return {"status": status, "value": value};
+  }
+}
+
+export function versionStringFromObject (versionObject) {
+  if (versionObject == null || versionObject == undefined) {
+    return Constants.NO_VALUE;
   }
 
-  return {"status": status, "value": value};
+  return versionObject.version ? versionObject.version.toString() : versionObject.toString();
 }

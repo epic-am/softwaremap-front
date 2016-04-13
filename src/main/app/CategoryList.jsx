@@ -69,9 +69,14 @@ var CategoryList = React.createClass({
     if (categoryMap !== null && categoryMap !== undefined) {
       categories = categoryMap.map(function(cat){
         return (
-          <div className="container" key={cat.id}>
-            <h1>{cat.type}</h1>
-            <ServiceList services={cat.services} key={cat.type} />
+          <div className="section section-tabs" key={cat.id}>
+            <div className="container tim-container text-center">
+              <div className="title text-center">
+                <h2>{cat.type}</h2>
+              </div>
+
+              <ServiceList services={cat.services} key={cat.type} />
+            </div>
           </div>
         );
       });

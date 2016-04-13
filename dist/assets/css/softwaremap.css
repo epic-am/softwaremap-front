@@ -1,0 +1,18 @@
+/* Header */
+.index-page .wrapper > .header {
+    height: 30vh;
+}
+
+/* service tiles */
+.section .card .header h3 {
+  margin: -5px 0 10px;
+}
+
+.section .card .content ul {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.content>.nav>li>a {
+  padding: 10px;
+}

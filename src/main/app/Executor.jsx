@@ -1,15 +1,44 @@
 import React from 'react';
 
+var ExecutorUtils = require('./utils/ExecutorUtils.jsx');
+
+
 var Executor = React.createClass({
 
   render: function() {
 
-    return (
+    var executor = this.props.executor;
 
-        <tr className="odd">
-          <td>{this.props.executor.name}</td>
-        </tr>
+    var modalAttributes = ExecutorUtils.modalAttributes;
+    var attr;
+
+    var attributesList = [];
+
+    for (var i = 0; i < modalAttributes.length; i++) {
+      attr = modalAttributes[i];
+
+      var toStringCallback = attr.toStringCallback ? attr.toStringCallback : ExecutorUtils.simpleToString;
+      var attrValue = toStringCallback.call(this, executor, attr.key);
+
+
+      attributesList.push(attrValue);
+    }
+
+    var attributesDisplay = attributesList.map(function(attrName) {
+      return (
+        <td>
+          {attrName}
+        </td>
+        );
+    });
+      
+
+    return (
+      <tr className="odd">
+        {attributesDisplay}
+      </tr>
     );
+
   }
 
 });
