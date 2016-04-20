@@ -1,5 +1,7 @@
 import React from 'react';
 import ServiceList from './ServiceList.jsx';
+import {connect} from 'react-redux';
+
 
 var JSONAPIDeserializer = require('jsonapi-serializer').Deserializer;
 
@@ -91,3 +93,11 @@ var CategoryList = React.createClass({
 });
 
 export default CategoryList;
+
+
+
+function mapStateToProps(state) {
+  return {};
+}
+
+export const CategoryListContainer = connect(mapStateToProps)(CategoryList);

@@ -69,10 +69,6 @@
         <div class="container">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <div class="brand">
-                <h1>Software Map</h1>
-                <h3>Check all your services healths and status</h3>
-              </div>
             </div>
           </div>
         </div>
@@ -116,5 +112,11 @@
       materialKit.initSliders();
         });
     </script>
+
+    <!-- Dirty hack to avoid warning because au material kit slider bug -->
+    <div style="display:none">
+      <div id="sliderRegular" />
+      <div id="sliderDouble" />
+    </div>
   </body>
 </html>

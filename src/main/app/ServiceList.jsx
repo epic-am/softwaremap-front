@@ -21,9 +21,9 @@ var ServiceList = React.createClass({
   render: function() {
 
     var services = this.props.services;
-    var serviceList = <h1>No service :(</h1>;
+    var serviceList = <div className="title text-center"><h1>No service :(</h1></div>;
 
-    if (services !== null && services.length > 0) {
+    if (services !== null && services !== undefined && services.length > 0) {
       serviceList = services.map(function(serv){
         return <Service serv={serv} key={serv.id} />
       });
