@@ -1,6 +1,6 @@
 import React from 'react';
 
-var ExecutorUtils = require('./utils/ExecutorUtils.jsx');
+var ExecutorUtils = require('../utils/ExecutorUtils.jsx');
 
 
 var Executor = React.createClass({

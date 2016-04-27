@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import { connect } from 'react-redux'
 import { fetchServices } from '../redux/actions'
-import ServiceList from '../ServiceList.jsx'
+import ServiceList from '../components/ServiceList.jsx'
 
 class AppLoader extends Component {
 
@@ -28,7 +28,7 @@ class AppLoader extends Component {
 function mapStateToProps(state) {
   return {
     services: state.services,
-    is_loading: state.app.loadincleg,
+    is_loading: state.app.is_loading,
     error: state.app.error
   }
 }

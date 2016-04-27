@@ -1,5 +1,5 @@
 import React from 'react';
-import Service from './Service.jsx';
+import ServiceContainer from '../containers/ServiceContainer.js';
 
 var ServiceList = React.createClass({
   getInitialState: function(){       
@@ -21,12 +21,16 @@ var ServiceList = React.createClass({
   render: function() {
 
     var services = this.props.services;
-    var serviceList = <div className="title text-center"><h1>No service :(</h1></div>;
+    var serviceList = <div className="title text-center"></div>;
 
     if (services !== null && services !== undefined && services.length > 0) {
       serviceList = services.map(function(serv){
-        return <Service serv={serv} key={serv.id} />
+        return <ServiceContainer serv={serv} key={serv.id} />
       });
+    } else if (this.props.is_loding == true) {
+        serviceList = <div className="title text-center"><h1>Loading ...</h1></div>;
+      } else {
+        serviceList = <div className="title text-center"><h1>No service :(</h1></div>;
     }
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import Executor from './Executor.jsx';
 
-var ExecutorUtils = require('./utils/ExecutorUtils.jsx');
+var ExecutorUtils = require('../utils/ExecutorUtils.jsx');
 
 var ExecutorList = React.createClass({
   getInitialState: function(){       
@@ -19,7 +19,7 @@ var ExecutorList = React.createClass({
       return (<th>{data}</th>);
     }); 
 
-    if (executors !== null && executors.length > 0) {
+    if (executors !== null && executors !== undefined && executors.length > 0) {
       executorList = executors.map(function(exec){
         return <Executor executor={exec} key={exec.id} />
       });

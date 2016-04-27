@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
-import { INITIALIZE_SERVICES, SET_LOADING_STATE, UPDATE_EXECUTOR } from './actions'
+import { UPDATE_EVERYTHING, SET_LOADING_STATE, UPDATE_EXECUTOR, CHANGE_SERVICE_TAB } from './actions'
+
+var Constants = require('../utils/Constants.jsx');
 
 const initialState = {
   app: {
@@ -25,9 +27,14 @@ function app(state = initialState.app, action) {
 function services(state = [], action) {
   switch (action.type) {
 
-    case INITIALIZE_SERVICES:
-      //Sould already be an array
-      return action.services 
+    case UPDATE_EVERYTHING:
+      var newState = state.length == 0 ? action.services : _.assign({}, state, action.services);
+      return newState.map((service) => {
+        if (service.current_tab == null || service.current_tab == undefined) {
+          service.current_tab = Constants.DEFAULT_SERVICE_TAB;
+        }
+        return service;
+      })
 
     case UPDATE_EXECUTOR:
       return state.map((service, index) => {
@@ -43,10 +50,19 @@ function services(state = [], action) {
             })
           })
         }
-
         return service
       })
 
+    case CHANGE_SERVICE_TAB:
+      var newState = state.map((service, index) => {
+        if (service.id === action.serviceIndex) {
+          return _.assign({}, service, {current_tab: action.new_tab})
+        } else {
+          return _.assign({}, service)
+        }
+      })
+
+      return newState
 
     default:
       return state

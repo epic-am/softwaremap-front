@@ -31,7 +31,7 @@ export function extractGlobalStatusFromExecutors(executors) {
   var tempStatus = "";
 
   if ( !executors || executors.length == 0) { 
-    return Constants.NO_STATUS;
+    return {"status": Constants.NO_STATUS, "value": Constants.NO_VALUE};
   }
 
   for (var i=0; i < executors.length; i++) {

@@ -1,0 +1,103 @@
+import React, { PropTypes }  from 'react';
+import ServiceGlobalValue from './ServiceGlobalValue.jsx';
+
+import ExecutorList from './ExecutorList.jsx';
+
+var StatusUtils = require('../utils/StatusUtils.jsx');
+var VersionUtils = require('../utils/VersionUtils.jsx');
+var HealthUtils = require('../utils/HealthUtils.jsx');
+var Constants = require('../utils/Constants.jsx');
+
+var Service = React.createClass({
+
+  getInitialState: function() {
+    return { modalIsOpen: false };
+  },
+ 
+  openModal: function() {
+    this.setState({modalIsOpen: true});
+  },
+ 
+  closeModal: function() {
+    this.setState({modalIsOpen: false});
+  },
+
+  render: function(){
+
+    var executors = this.props.serv.executors;
+
+    var servHealth = HealthUtils.getServiceHealthFromExecutors(executors);
+    var healthHeaderClass="header header-" + Constants.statusClassMap[servHealth];
+
+
+    var tabDisplay = <div>This should not be seen</div>
+
+    switch(this.props.serv.current_tab) {
+      case Constants.DETAILS_SERVICE_TAB:
+        tabDisplay = <div>This is the details display</div>
+      break;
+
+      case Constants.EXECUTORS_SERVICE_TAB:
+        tabDisplay = <div className="content"><ExecutorList servId={this.props.serv.id} executors={this.props.executors} /></div>
+      break;
+
+      case Constants.HEALTH_SERVICE_TAB:
+      default:
+        tabDisplay = (
+          <div className="content">
+            <ServiceGlobalValue data={VersionUtils.extractGlobalVersionFromExecutors(executors)} renderCallback={VersionUtils.versionStringFromObject} iconType={Constants.FONT_AWESOME} iconName="fa-sort-numeric-asc" />
+            <ServiceGlobalValue data={StatusUtils.extractGlobalStatusFromExecutors(executors)} iconType={Constants.FONT_AWESOME} iconName="fa-power-off" />
+          </div>
+          )
+      break;
+    }
+
+    return (
+      <div className="col-md-6">
+        <div className="card card-nav-tabs">
+
+
+          <div className={healthHeaderClass}>
+            <h3>{this.props.serv.name}</h3>
+            <div className="nav-tabs-navigation">
+              <div className="nav-tabs-wrapper">
+                <ul className="nav nav-tabs" data-tabs="tabs">
+                  <li className="active">
+                    <a href="#health" data-toggle="tab" onClick={e => this.props.onTabChange(Constants.HEALTH_SERVICE_TAB)}>
+                      <i className="fa fa-2x fa-heartbeat material-icons" aria-hidden="true"></i>
+                      &nbsp; Health
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#executors" data-toggle="tab" onClick={e => this.props.onTabChange(Constants.EXECUTORS_SERVICE_TAB)}>
+                      <i className="material-icons">dns</i>
+                      &nbsp; Executors
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#details" data-toggle="tab" onClick={e => this.props.onTabChange(Constants.DETAILS_SERVICE_TAB)}>
+                      <i className="fa fa-2x fa-info material-icons" aria-hidden="true"></i>
+                      &nbsp; Details
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+          {tabDisplay}
+          
+
+        </div>
+      </div>
+    );
+  }
+
+});
+
+Service.propTypes = {
+  onTabChange: PropTypes.func.isRequired
+}
+
+export default Service;
