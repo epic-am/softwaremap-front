@@ -11,7 +11,7 @@ class AppLoader extends Component {
     const { dispatch } = this.props
 
     dispatch(fetchServices())
-    setInterval(function () {dispatch(fetchServices())}, 60000);
+    setInterval(function () {dispatch(fetchServices())}, 10000);
   }
 
   render() {

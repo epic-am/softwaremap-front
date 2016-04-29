@@ -28,14 +28,29 @@ function services(state = [], action) {
   switch (action.type) {
 
     case UPDATE_EVERYTHING:
-      var newState = state.length == 0 ? action.services : _.assign({}, state, action.services);
-      return newState.map((service) => {
-        if (service.current_tab == null || service.current_tab == undefined) {
-          service.current_tab = Constants.DEFAULT_SERVICE_TAB;
-        }
-        return service;
-      })
 
+      if (action.services == null || action.services == undefined || action.services.length == 0) {
+        return this.initialState.services
+      }
+
+      if (state.length == 0) {
+        return action.services
+      }
+
+      var newState = [];
+      var serv;
+      for (var i=0; i< action.services.length; i++) {
+        newState.push(action.services[i])
+        newState[i].current_tab = Constants.DEFAULT_SERVICE_TAB
+        for (var j=0; j < state.length; j++) {
+          if (state[j].id == newState[i].id) {
+            newState[i].current_tab = state[j].current_tab
+          }
+        }
+      }
+
+      return newState;
+    
     case UPDATE_EXECUTOR:
       return state.map((service, index) => {
         if (index === action.serviceIndex) {

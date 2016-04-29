@@ -38,7 +38,7 @@ var Service = React.createClass({
       break;
 
       case Constants.EXECUTORS_SERVICE_TAB:
-        tabDisplay = <div className="content"><ExecutorList servId={this.props.serv.id} executors={this.props.executors} /></div>
+        tabDisplay = <div className="content executor-list"><ExecutorList servId={this.props.serv.id} executors={this.props.serv.executors} /></div>
       break;
 
       case Constants.HEALTH_SERVICE_TAB:

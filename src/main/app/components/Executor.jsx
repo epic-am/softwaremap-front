@@ -9,13 +9,13 @@ var Executor = React.createClass({
 
     var executor = this.props.executor;
 
-    var modalAttributes = ExecutorUtils.modalAttributes;
+    var attributesToDisplay = ExecutorUtils.attributesToDisplay;
     var attr;
 
     var attributesList = [];
 
-    for (var i = 0; i < modalAttributes.length; i++) {
-      attr = modalAttributes[i];
+    for (var i = 0; i < attributesToDisplay.length; i++) {
+      attr = attributesToDisplay[i];
 
       var toStringCallback = attr.toStringCallback ? attr.toStringCallback : ExecutorUtils.simpleToString;
       var attrValue = toStringCallback.call(this, executor, attr.key);
@@ -25,8 +25,9 @@ var Executor = React.createClass({
     }
 
     var attributesDisplay = attributesList.map(function(attrName) {
+      var objKey = executor.id + "-" + attrName
       return (
-        <td>
+        <td className="text-center" key={objKey}>
           {attrName}
         </td>
         );
@@ -34,7 +35,7 @@ var Executor = React.createClass({
       
 
     return (
-      <tr className="odd">
+      <tr>
         {attributesDisplay}
       </tr>
     );

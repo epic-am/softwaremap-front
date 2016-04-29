@@ -16,3 +16,9 @@
 .content>.nav>li>a {
   padding: 10px;
 }
+
+/* executor list */
+div.content.executor-list {
+  max-height: 400px;
+  overflow: auto;
+}
