@@ -29,7 +29,7 @@ var ServiceGlobalValue = React.createClass({
     var iconType = this.props.iconType ? this.props.iconType : Constants.DEFAULT_PILL_ICON_TYPE;
     var iconName = this.props.iconName ? this.props.iconName : Constants.DEFAULT_PILL_ICON_NAME;
     
-    var icon = (<i class="fa fa-times" aria-hidden="true"></i>);
+    var icon = (<i className="fa fa-times" aria-hidden="true"></i>);
 
     if (iconType == Constants.FONT_AWESOME) {
       var iconClass = "fa fa-2x material-icons " + iconName;
@@ -39,7 +39,7 @@ var ServiceGlobalValue = React.createClass({
     }
 
     return (
-      <ul className={finalClassName} role="tablist">
+      <ul className={finalClassName} role="tablist" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
         <li className="active">
 
         

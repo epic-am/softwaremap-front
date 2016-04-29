@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { UPDATE_EVERYTHING, SET_LOADING_STATE, UPDATE_EXECUTOR, CHANGE_SERVICE_TAB } from './actions'
+import { UPDATE_EVERYTHING,  OPEN_SERVICE_CARD, CLOSE_SERVICE_CARD, SET_LOADING_STATE, CHANGE_SERVICE_TAB } from './actions'
 
 var Constants = require('../utils/Constants.jsx');
 
@@ -33,51 +33,48 @@ function services(state = [], action) {
         return this.initialState.services
       }
 
-      if (state.length == 0) {
-        return action.services
-      }
-
       var newState = [];
       var serv;
       for (var i=0; i< action.services.length; i++) {
         newState.push(action.services[i])
         newState[i].current_tab = Constants.DEFAULT_SERVICE_TAB
+        newState[i].card_open = true
         for (var j=0; j < state.length; j++) {
           if (state[j].id == newState[i].id) {
             newState[i].current_tab = state[j].current_tab
+            newState[i].card_open = state[j].card_open
           }
         }
       }
 
       return newState;
     
-    case UPDATE_EXECUTOR:
-      return state.map((service, index) => {
-        if (index === action.serviceIndex) {
-          return _.assign({}, service, {
-            executors: service.executors.map((executor, ind) => {
-              if (ind === action.executorIndex) {
-                return _.assign({}, executor, {
-                  metadata: action.metadata
-                })
-              }
-              return executor
-            })
-          })
+    case OPEN_SERVICE_CARD:
+      return state.map((service) => {
+        if (service.id === action.serviceId) {
+          return _.assign({}, service, {card_open: true})
+        } else {
+          return _.assign({}, service)
         }
-        return service
       })
-
-    case CHANGE_SERVICE_TAB:
-      var newState = state.map((service, index) => {
-        if (service.id === action.serviceIndex) {
-          return _.assign({}, service, {current_tab: action.new_tab})
+  
+    case CLOSE_SERVICE_CARD:
+      return state.map((service) => {
+        if (service.id === action.serviceId) {
+          return _.assign({}, service, {card_open: false})
         } else {
           return _.assign({}, service)
         }
       })
 
-      return newState
+    case CHANGE_SERVICE_TAB:
+      return state.map((service, index) => {
+        if (service.id === action.serviceId) {
+          return _.assign({}, service, {current_tab: action.new_tab})
+        } else {
+          return _.assign({}, service)
+        }
+      })
 
     default:
       return state

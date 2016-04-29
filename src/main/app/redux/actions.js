@@ -18,13 +18,10 @@ export const FETCH_SERVICES     = 'FETCH_SERVICES'
 export const REQUEST_SERVICES   = 'REQUEST_SERVICES'
 export const UPDATE_EVERYTHING  = 'UPDATE_EVERYTHING'
 
-export const ADD_SERVICE        = 'ADD_SERVICE'
-export const UPDATE_SERVICE     = 'UPDATE_SERVICE'
-
-export const ADD_EXECUTOR       = 'ADD_EXECUTOR'
-export const UPDATE_EXECUTOR    = 'UPDATE_EXECUTOR'
-
 export const CHANGE_SERVICE_TAB = 'CHANGE_SERVICE_TAB'
+
+export const OPEN_SERVICE_CARD   = 'OPEN_SERVICE_CARD'
+export const CLOSE_SERVICE_CARD = 'CLOSE_SERVICE_CARD'
 
 /* 
  *     ACTION CREATORS
@@ -33,28 +30,20 @@ function initialize_services(services) {
   return { type: UPDATE_EVERYTHING, services }
 }
 
-export function addService(service) {
-  return { type: ADD_SERVICE, service }
-}
-
-export function updateService(metadata) {
-  return { type: UPDATE_SERVICE, metadata }
-}
-
-export function addExecutor(executor) {
-  return { type: ADD_EXECUTOR, executor }
-}
-
-export function updateExecutor(serviceIndex, executorIndex, metadata) {
-  return { type: UPDATE_EXECUTOR, serviceIndex, executorIndex, metadata }
-}
-
 export function setLoadingState(loadingState) {
   return { type: SET_LOADING_STATE, loadingState }
 }
 
-export function changeServiceTab(serviceIndex, new_tab) {
-  return { type: CHANGE_SERVICE_TAB, serviceIndex, new_tab }
+export function changeServiceTab(serviceId, new_tab) {
+  return { type: CHANGE_SERVICE_TAB, serviceId, new_tab }
+}
+
+export function openServiceCard(serviceId) {
+  return { type: OPEN_SERVICE_CARD, serviceId }
+}
+
+export function closeServiceCard(serviceId) {
+  return { type: CLOSE_SERVICE_CARD, serviceId }
 }
 
 function requestServices() {

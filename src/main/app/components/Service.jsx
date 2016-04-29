@@ -13,13 +13,13 @@ var Service = React.createClass({
   getInitialState: function() {
     return { modalIsOpen: false };
   },
- 
-  openModal: function() {
-    this.setState({modalIsOpen: true});
+
+  openCard: function() {
+
   },
- 
-  closeModal: function() {
-    this.setState({modalIsOpen: false});
+
+  closeCard: function() {
+
   },
 
   render: function(){
@@ -30,34 +30,46 @@ var Service = React.createClass({
     var healthHeaderClass="header header-" + Constants.statusClassMap[servHealth];
 
 
-    var tabDisplay = <div>This should not be seen</div>
+    var cardContent = <div>This should not be seen</div>
 
-    switch(this.props.serv.current_tab) {
-      case Constants.DETAILS_SERVICE_TAB:
-        tabDisplay = <div>This is the details display</div>
-      break;
+    if (this.props.serv.card_open) {
+      switch(this.props.serv.current_tab) {
+        case Constants.DETAILS_SERVICE_TAB:
+          cardContent = <div>This is the details display, coming soon !</div>
+        break;
 
-      case Constants.EXECUTORS_SERVICE_TAB:
-        tabDisplay = <div className="content executor-list"><ExecutorList servId={this.props.serv.id} executors={this.props.serv.executors} /></div>
-      break;
+        case Constants.EXECUTORS_SERVICE_TAB:
+          cardContent = <div className="content executor-list"><ExecutorList servId={this.props.serv.id} executors={this.props.serv.executors} /></div>
+        break;
 
-      case Constants.HEALTH_SERVICE_TAB:
-      default:
-        tabDisplay = (
-          <div className="content">
-            <ServiceGlobalValue data={VersionUtils.extractGlobalVersionFromExecutors(executors)} renderCallback={VersionUtils.versionStringFromObject} iconType={Constants.FONT_AWESOME} iconName="fa-sort-numeric-asc" />
-            <ServiceGlobalValue data={StatusUtils.extractGlobalStatusFromExecutors(executors)} iconType={Constants.FONT_AWESOME} iconName="fa-power-off" />
-          </div>
-          )
-      break;
+        case Constants.HEALTH_SERVICE_TAB:
+        default:
+          cardContent = (
+            <div className="content">
+              <ServiceGlobalValue data={VersionUtils.extractGlobalVersionFromExecutors(executors)} renderCallback={VersionUtils.versionStringFromObject} iconType={Constants.FONT_AWESOME} iconName="fa-sort-numeric-asc" />
+              <ServiceGlobalValue data={StatusUtils.extractGlobalStatusFromExecutors(executors)} iconType={Constants.FONT_AWESOME} iconName="fa-power-off" />
+            </div>
+            )
+        break;
+      }
+    } else {
+      var contentDisplayNone = {display: "none"};
+      cardContent = <div className="content" style={contentDisplayNone} />
+    }
+
+    var openCloseCardButton;
+    if (this.props.serv.card_open) {
+      openCloseCardButton = (<i className="serviceCardMaxMin material-icons md-48" onClick={e => this.props.closeCard()}>keyboard_arrow_up</i>)
+    } else {
+      openCloseCardButton = (<i className="serviceCardMaxMin material-icons md-48" onClick={e => this.props.openCard()}>keyboard_arrow_down</i>)
     }
 
     return (
       <div className="col-md-6">
         <div className="card card-nav-tabs">
 
-
           <div className={healthHeaderClass}>
+            {openCloseCardButton}
             <h3>{this.props.serv.name}</h3>
             <div className="nav-tabs-navigation">
               <div className="nav-tabs-wrapper">
@@ -83,10 +95,11 @@ var Service = React.createClass({
                 </ul>
               </div>
             </div>
+            
           </div>
 
 
-          {tabDisplay}
+          {cardContent}
           
 
         </div>
@@ -97,7 +110,9 @@ var Service = React.createClass({
 });
 
 Service.propTypes = {
-  onTabChange: PropTypes.func.isRequired
+  onTabChange: PropTypes.func.isRequired,
+  openCard: PropTypes.func.isRequired,
+  closeCard: PropTypes.func.isRequired
 }
 
 export default Service;
