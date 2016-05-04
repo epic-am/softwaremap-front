@@ -20,6 +20,9 @@ export const UPDATE_EVERYTHING  = 'UPDATE_EVERYTHING'
 
 export const CHANGE_SERVICE_TAB = 'CHANGE_SERVICE_TAB'
 
+export const OPEN_ALL_SERVICE_CARDS  = 'OPEN_ALL_SERVICE_CARDS'
+export const CLOSE_ALL_SERVICE_CARDS = 'CLOSE_ALL_SERVICE_CARDS'
+
 export const OPEN_SERVICE_CARD   = 'OPEN_SERVICE_CARD'
 export const CLOSE_SERVICE_CARD = 'CLOSE_SERVICE_CARD'
 
@@ -36,6 +39,14 @@ export function setLoadingState(loadingState) {
 
 export function changeServiceTab(serviceId, new_tab) {
   return { type: CHANGE_SERVICE_TAB, serviceId, new_tab }
+}
+
+export function openAllServiceCards() {
+  return { type: OPEN_ALL_SERVICE_CARDS }
+}
+
+export function closeAllServiceCards() {
+  return { type: CLOSE_ALL_SERVICE_CARDS }
 }
 
 export function openServiceCard(serviceId) {

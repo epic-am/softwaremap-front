@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux'
-import { UPDATE_EVERYTHING,  OPEN_SERVICE_CARD, CLOSE_SERVICE_CARD, SET_LOADING_STATE, CHANGE_SERVICE_TAB } from './actions'
+import { UPDATE_EVERYTHING, 
+  OPEN_ALL_SERVICE_CARDS, CLOSE_ALL_SERVICE_CARDS,
+  OPEN_SERVICE_CARD, CLOSE_SERVICE_CARD, 
+  SET_LOADING_STATE, 
+  CHANGE_SERVICE_TAB } from './actions'
 
 var Constants = require('../utils/Constants.jsx');
 
@@ -8,7 +12,7 @@ const initialState = {
     loading : true,
     error : null
   },
-  services : {}
+  services : []
 }
 
 
@@ -48,6 +52,16 @@ function services(state = [], action) {
       }
 
       return newState;
+
+    case OPEN_ALL_SERVICE_CARDS:
+      return state.map((service) => {
+        return _.assign({}, service, {card_open: true})
+      })
+  
+    case CLOSE_ALL_SERVICE_CARDS:
+      return state.map((service) => {
+        return _.assign({}, service, {card_open: false})
+      })
     
     case OPEN_SERVICE_CARD:
       return state.map((service) => {

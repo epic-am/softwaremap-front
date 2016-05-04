@@ -16,6 +16,7 @@
     height: 30vh;
 }
 
+
 /* service tiles */
 .serviceCardMaxMin {
   cursor: pointer;
@@ -46,4 +47,10 @@
 div.content.executor-list {
   max-height: 400px;
   overflow: auto;
+}
+
+/* Override for global action button */
+.serviceCardMaxMin.allCards {
+  right: 10px;
+  top: 10px;
 }
