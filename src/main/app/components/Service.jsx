@@ -1,5 +1,6 @@
 import React, { PropTypes }  from 'react';
 import ServiceGlobalValue from './ServiceGlobalValue.jsx';
+import ServiceDetails from './ServiceDetails.jsx';
 
 import ExecutorList from './ExecutorList.jsx';
 
@@ -35,12 +36,16 @@ var Service = React.createClass({
     if (this.props.serv.card_open) {
       switch(this.props.serv.current_tab) {
         case Constants.DETAILS_SERVICE_TAB:
-          cardContent = <div>This is the details display, coming soon !</div>
-        break;
+          cardContent = (
+            <ServiceDetails serv={this.props.serv} />
+            )
+        break
 
         case Constants.EXECUTORS_SERVICE_TAB:
-          cardContent = <div className="content executor-list"><ExecutorList servId={this.props.serv.id} executors={this.props.serv.executors} /></div>
-        break;
+          cardContent = (
+            <div className="content executor-list"><ExecutorList servId={this.props.serv.id} executors={this.props.serv.executors} /></div>
+            )
+        break
 
         case Constants.HEALTH_SERVICE_TAB:
         default:
@@ -50,7 +55,7 @@ var Service = React.createClass({
               <ServiceGlobalValue data={StatusUtils.extractGlobalStatusFromExecutors(executors)} iconType={Constants.FONT_AWESOME} iconName="fa-power-off" />
             </div>
             )
-        break;
+        break
       }
     } else {
       var contentDisplayNone = {display: "none"};
