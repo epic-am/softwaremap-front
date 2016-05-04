@@ -34,8 +34,6 @@ var ServiceDetails = React.createClass({
         )
     });
 
-
-
     var tableKey = "servicedetails-" + service.id;
     return (
       <table className="table" key={tableKey}>
