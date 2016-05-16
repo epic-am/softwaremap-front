@@ -15,14 +15,6 @@ var Service = React.createClass({
     return { modalIsOpen: false };
   },
 
-  openCard: function() {
-
-  },
-
-  closeCard: function() {
-
-  },
-
   render: function(){
 
     var executors = this.props.serv.executors;
@@ -51,8 +43,14 @@ var Service = React.createClass({
         default:
           cardContent = (
             <div className="content">
-              <ServiceGlobalValue data={VersionUtils.extractGlobalVersionFromExecutors(executors)} renderCallback={VersionUtils.versionStringFromObject} iconType={Constants.FONT_AWESOME} iconName="fa-sort-numeric-asc" />
-              <ServiceGlobalValue data={StatusUtils.extractGlobalStatusFromExecutors(executors)} iconType={Constants.FONT_AWESOME} iconName="fa-power-off" />
+              <ServiceGlobalValue data={VersionUtils.extractGlobalVersionFromExecutors(executors)} 
+                                  renderCallback={VersionUtils.versionStringFromObject} 
+                                  tooltipRenderCallback={VersionUtils.versionFullStringFromObject}
+                                  iconType={Constants.FONT_AWESOME} 
+                                  iconName="fa-sort-numeric-asc" />
+              <ServiceGlobalValue data={StatusUtils.extractGlobalStatusFromExecutors(executors)} 
+                                  iconType={Constants.FONT_AWESOME} 
+                                  iconName="fa-power-off" />
             </div>
             )
         break
@@ -68,6 +66,9 @@ var Service = React.createClass({
     } else {
       openCloseCardButton = (<i className="serviceCardMaxMin material-icons md-48" onClick={e => this.props.openCard()}>keyboard_arrow_down</i>)
     }
+
+    // In case any "ServiceGlobalValue" has a tooltip setting
+    $('[data-toggle="tooltip"]').tooltip();
 
     return (
       <div className="col-md-6">

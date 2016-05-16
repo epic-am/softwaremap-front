@@ -105,14 +105,13 @@
         $().ready(function(){
             suggestions_distance = $("#suggestions").offset();
             pay_height = $('.fixed-section').outerHeight();
+            
+            $(window).on('scroll', materialKit.checkScrollForTransparentNavbar);
 
-      $(window).on('scroll', materialKit.checkScrollForTransparentNavbar);
-
-      // the body of this function is in assets/material-kit.js
-      materialKit.initSliders();
+          // the body of this function is in assets/material-kit.js
+          materialKit.initSliders();
         });
     </script>
-
     <!-- Dirty hack to avoid warning because au material kit slider bug -->
     <div style="display:none">
       <div id="sliderRegular" />

@@ -53,3 +53,17 @@ export function versionStringFromObject (versionObject) {
 
   return versionObject.version ? versionObject.version.toString() : versionObject.toString();
 }
+
+export function versionFullStringFromObject (versionObject) {
+  if (versionObject == null || versionObject == undefined) {
+    return Constants.NO_VALUE;
+  }
+
+  var finalString = "";
+
+  for(var propt in versionObject){
+      finalString += propt +": " + versionObject[propt] + "\n";
+  }
+
+  return finalString;
+}
