@@ -64,7 +64,7 @@ function requestServices() {
 export function fetchServices() {
   return dispatch => {
     dispatch(requestServices())
-    return fetch(`http://127.0.0.1:3000/api/services`)
+    return fetch(`http://127.0.0.1:4000/api/services`)
       .then(response => response.text())
       .then(json => {
 
