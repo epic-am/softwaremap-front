@@ -72,9 +72,11 @@ class AppLoader extends Component {
           return serv.env == e;
         });
 
+        var title = env.length == 1 ? undefined : (<h1 className="text-center">{e}</h1>);
+
         return(
           <div className="main main-raised">
-            <h1 className="text-center">{e}</h1>
+            {title}
             <div className="section section-tabs">
               {openCloseAllCardsButton}
               <div className="container tim-container text-center">
