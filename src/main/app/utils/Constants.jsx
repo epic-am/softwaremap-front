@@ -23,6 +23,10 @@ export var EXECUTORS_SERVICE_TAB = "EXECUTORS_SERVICE_TAB";
 export var DETAILS_SERVICE_TAB   = "DETAILS_SERVICE_TAB";
 export var DEFAULT_SERVICE_TAB   = HEALTH_SERVICE_TAB
 
+export var DEFAULT_ENV       = "none"
+export var ENV_ORDER         = {"PROD" : 1, "PREPROD" : 2, "QUALIF" : 3};
+export var ENV_OTHER_ORDER   = 99;
+
 /******************************************
               STATIC FOR STYLE
 ******************************************/

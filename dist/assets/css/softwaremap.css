@@ -16,6 +16,11 @@
     height: 30vh;
 }
 
+/* Main card */
+
+.main-raised {
+  margin-bottom: 120px;
+}
 
 /* service tiles */
 .serviceCardMaxMin {

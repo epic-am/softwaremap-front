@@ -4,6 +4,10 @@ import { connect } from 'react-redux'
 import { fetchServices, openAllServiceCards, closeAllServiceCards } from '../redux/actions'
 import ServiceList from '../components/ServiceList.jsx'
 
+var _ = require('lodash');
+var Constants = require('../utils/Constants.jsx');
+var EnvUtils = require('../utils/EnvUtils.jsx');
+
 class AppLoader extends Component {
 
   constructor(props) {
@@ -37,13 +41,51 @@ class AppLoader extends Component {
       openCloseAllCardsButton = (<i className="allCards serviceCardMaxMin material-icons md-48" onClick={e => this.openAllCards()}>keyboard_arrow_down</i>)
     }
 
+
+    var env = [];
+
+    if (this.props.services !== null && this.props.services != undefined && this.props.services.length > 0) {
+
+      env = this.props.services.map(function(serv){
+        if ((serv.env === null || serv.env === undefined || _.isEmpty(serv.env)) && _.indexOf(env, Constants.DEFAULT_ENV) == -1) {
+          return Constants.DEFAULT_ENV;
+        } else if (_.indexOf(env, serv.env) == -1) {
+          return serv.env;
+        }
+      });
+    } 
+    
+    
+    var servicesBlocks = (<div>Nothing to show</div>);
+
+    if (env !== null && env !== undefined && env.length > 0) {
+
+      env = EnvUtils.sortEnv(env);
+
+
+      var filteredServices;
+      var services = this.props.services;
+
+      servicesBlocks = env.map(function(e) { 
+        filteredServices = services.filter( function(serv){ 
+          return serv.env == e;
+        });
+
+        return(
+          <div className="main main-raised">
+            <h1 className="text-center">{e}</h1>
+            <div className="section section-tabs">
+              {openCloseAllCardsButton}
+              <div className="container tim-container text-center">
+                <ServiceList services={filteredServices} />
+              </div>
+            </div>
+          </div>);
+      });
+    }
+
     return (
-      <div className="section section-tabs">
-        {openCloseAllCardsButton}
-        <div className="container tim-container text-center">
-          <ServiceList services={this.props.services} />
-        </div>
-      </div>
+      <div>{ servicesBlocks }</div>
     )
   }
 }
