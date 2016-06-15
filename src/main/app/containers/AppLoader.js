@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 import { connect } from 'react-redux'
-import { fetchServices, openAllServiceCards, closeAllServiceCards } from '../redux/actions'
+import { fetchServices, openEnvServiceCards, closeEnvServiceCards } from '../redux/actions'
 import ServiceList from '../components/ServiceList.jsx'
 
 var _ = require('lodash');
@@ -24,23 +24,15 @@ class AppLoader extends Component {
     setInterval(function () {dispatch(fetchServices())}, 10000);
   }
 
-  openAllCards() {
-    this.props.dispatch(openAllServiceCards());
+  openAllCards(env) {
+    this.props.dispatch(openEnvServiceCards(env));
   }
 
-  closeAllCards() {
-    this.props.dispatch(closeAllServiceCards());
+  closeAllCards(env) {
+    this.props.dispatch(closeEnvServiceCards(env));
   }
 
   render() {
-
-    var openCloseAllCardsButton;
-    if (this.props.services.some(s => s.card_open)) {
-      openCloseAllCardsButton = (<i className="allCards serviceCardMaxMin material-icons md-48" onClick={e => this.closeAllCards()}>keyboard_arrow_up</i>)
-    } else {
-      openCloseAllCardsButton = (<i className="allCards serviceCardMaxMin material-icons md-48" onClick={e => this.openAllCards()}>keyboard_arrow_down</i>)
-    }
-
 
     var env = [];
 
@@ -61,11 +53,12 @@ class AppLoader extends Component {
 
     if (env !== null && env !== undefined && env.length > 0) {
 
-      env = EnvUtils.sortEnv(env);
-
-
-      var filteredServices;
       var services = this.props.services;
+      var filteredServices;
+      var closeFunction = this.closeAllCards;
+      var openFunction = this.openAllCards;
+
+      env = EnvUtils.sortEnv(env);
 
       servicesBlocks = env.map(function(e) { 
         filteredServices = services.filter( function(serv){ 
@@ -74,8 +67,16 @@ class AppLoader extends Component {
 
         var title = env.length == 1 ? undefined : (<h1 className="text-center">{e}</h1>);
 
+
+        var openCloseAllCardsButton;
+        if (filteredServices.some(s => s.card_open)) {
+          openCloseAllCardsButton = (<i className="allCards serviceCardMaxMin material-icons md-48" onClick={ev => closeFunction(e)}>keyboard_arrow_up</i>)
+        } else {
+          openCloseAllCardsButton = (<i className="allCards serviceCardMaxMin material-icons md-48" onClick={ev => openFunction(e)}>keyboard_arrow_down</i>)
+        }
+
         return(
-          <div className="main main-raised">
+          <div key={e} className="main main-raised">
             {title}
             <div className="section section-tabs">
               {openCloseAllCardsButton}

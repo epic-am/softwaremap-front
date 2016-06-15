@@ -22,6 +22,8 @@ export const CHANGE_SERVICE_TAB = 'CHANGE_SERVICE_TAB'
 
 export const OPEN_ALL_SERVICE_CARDS  = 'OPEN_ALL_SERVICE_CARDS'
 export const CLOSE_ALL_SERVICE_CARDS = 'CLOSE_ALL_SERVICE_CARDS'
+export const OPEN_ENV_SERVICE_CARDS  = 'OPEN_ENV_SERVICE_CARDS'
+export const CLOSE_ENV_SERVICE_CARDS = 'CLOSE_ENV_SERVICE_CARDS'
 
 export const OPEN_SERVICE_CARD   = 'OPEN_SERVICE_CARD'
 export const CLOSE_SERVICE_CARD = 'CLOSE_SERVICE_CARD'
@@ -47,6 +49,20 @@ export function openAllServiceCards() {
 
 export function closeAllServiceCards() {
   return { type: CLOSE_ALL_SERVICE_CARDS }
+}
+
+export function openEnvServiceCards(env) {
+  if (env === null || env === undefined || env.length == 0) {
+    return openAllServiceCards();
+  }
+  return { type: OPEN_ENV_SERVICE_CARDS, env }
+}
+
+export function closeEnvServiceCards(env) {
+  if (env === null || env === undefined || env.length == 0) {
+    return closeAllServiceCards();
+  }
+  return { type: CLOSE_ENV_SERVICE_CARDS, env }
 }
 
 export function openServiceCard(serviceId) {

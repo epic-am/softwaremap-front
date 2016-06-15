@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import { UPDATE_EVERYTHING, 
   OPEN_ALL_SERVICE_CARDS, CLOSE_ALL_SERVICE_CARDS,
+  OPEN_ENV_SERVICE_CARDS, CLOSE_ENV_SERVICE_CARDS,
   OPEN_SERVICE_CARD, CLOSE_SERVICE_CARD, 
   SET_LOADING_STATE, 
   CHANGE_SERVICE_TAB } from './actions'
@@ -61,6 +62,24 @@ function services(state = [], action) {
     case CLOSE_ALL_SERVICE_CARDS:
       return state.map((service) => {
         return _.assign({}, service, {card_open: false})
+      })
+
+    case OPEN_ENV_SERVICE_CARDS:
+     return state.map((service) => {
+        if (service.env === action.env) {
+          return _.assign({}, service, {card_open: true})
+        } else {
+          return _.assign({}, service)
+        }
+      })
+  
+    case CLOSE_ENV_SERVICE_CARDS:
+      return state.map((service) => {
+        if (service.env === action.env) {
+          return _.assign({}, service, {card_open: false})
+        } else {
+          return _.assign({}, service)
+        }
       })
     
     case OPEN_SERVICE_CARD:
