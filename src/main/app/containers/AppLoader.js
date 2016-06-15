@@ -47,12 +47,13 @@ class AppLoader extends Component {
     if (this.props.services !== null && this.props.services != undefined && this.props.services.length > 0) {
 
       env = this.props.services.map(function(serv){
-        if ((serv.env === null || serv.env === undefined || _.isEmpty(serv.env)) && _.indexOf(env, Constants.DEFAULT_ENV) == -1) {
+        if (serv.env === null || serv.env === undefined || _.isEmpty(serv.env)) {
           return Constants.DEFAULT_ENV;
-        } else if (_.indexOf(env, serv.env) == -1) {
+        } else {
           return serv.env;
         }
       });
+      env = _.uniq(env);
     } 
     
     
