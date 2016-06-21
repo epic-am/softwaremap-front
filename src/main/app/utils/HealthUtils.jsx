@@ -13,5 +13,23 @@ export function getServiceHealthFromExecutors (executors) {
     return Constants.NO_STATUS;
   }
 
-  return StatusUtils.extractGlobalStatusFromExecutors(executors).value;
+  var status = StatusUtils.extractGlobalStatusFromExecutors(executors).value;
+
+  if (status == Constants.NO_STATUS) {
+    return Constants.WARNING_STATUS;
+  }
+  if (status != Constants.OK_STATUS) {
+    return status;
+  }
+
+  var status = VersionUtils.extractGlobalVersionFromExecutors(executors).status;
+
+  if (status == Constants.NO_STATUS) {
+    return Constants.WARNING_STATUS;
+  }
+  if (status != Constants.OK_STATUS) {
+    return status;
+  }
+
+  return Constants.OK_STATUS; 
 }

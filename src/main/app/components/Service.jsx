@@ -24,7 +24,7 @@ var Service = React.createClass({
 
 
     var cardContent = <div>This should not be seen</div>
-
+    var cardContainerClass = "card card-nav-tabs"
     if (this.props.serv.card_open) {
       switch(this.props.serv.current_tab) {
         case Constants.DETAILS_SERVICE_TAB:
@@ -58,6 +58,7 @@ var Service = React.createClass({
     } else {
       var contentDisplayNone = {display: "none"};
       cardContent = <div className="content" style={contentDisplayNone} />
+      cardContainerClass = cardContainerClass + " closedCard"
     }
 
     var openCloseCardButton;
@@ -72,7 +73,7 @@ var Service = React.createClass({
 
     return (
       <div className="col-md-6">
-        <div className="card card-nav-tabs">
+        <div className={cardContainerClass}>
 
           <div className={healthHeaderClass}>
             {openCloseCardButton}

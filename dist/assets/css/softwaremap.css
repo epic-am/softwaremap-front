@@ -30,6 +30,11 @@
   bottom: 10px;
 }
 
+.card.closedCard {
+  background: none;
+  box-shadow: none;
+}
+
 .section .card .header {
   position: relative;
 }

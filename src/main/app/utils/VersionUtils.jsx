@@ -27,7 +27,7 @@ export function extractGlobalVersionFromExecutors (executors) {
           }
 
         } else {
-          if (value === null || value === undefined) {
+          if (value === null || value === undefined || (value === Constants.NO_VALUE && status === Constants.NO_STATUS)) {
             value = Constants.NO_VALUE;
             status = Constants.NO_STATUS;
           } else {
