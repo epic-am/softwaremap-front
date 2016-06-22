@@ -44,6 +44,9 @@ function services(state = [], action) {
         newState.push(action.services[i])
         newState[i].current_tab = Constants.DEFAULT_SERVICE_TAB
         newState[i].card_open = true
+        if (newState[i].env === null || newState[i].env === undefined || newState[i].env === "") {
+          newState[i].env = Constants.DEFAULT_ENV;
+        }
         for (var j=0; j < state.length; j++) {
           if (state[j].id == newState[i].id) {
             newState[i].current_tab = state[j].current_tab
