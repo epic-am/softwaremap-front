@@ -3,6 +3,7 @@ import { UPDATE_EVERYTHING,
   OPEN_ALL_SERVICE_CARDS, CLOSE_ALL_SERVICE_CARDS,
   OPEN_ENV_SERVICE_CARDS, CLOSE_ENV_SERVICE_CARDS,
   OPEN_SERVICE_CARD, CLOSE_SERVICE_CARD, 
+  OPEN_ENV_CARD, CLOSE_ENV_CARD, 
   SET_LOADING_STATE, 
   CHANGE_SERVICE_TAB } from './actions'
 
@@ -11,10 +12,13 @@ var Constants = require('../utils/Constants.jsx');
 const initialState = {
   app: {
     loading : true,
-    error : null
+    error : null,
   },
+  envProps : [],
   services : []
 }
+
+
 
 
 function app(state = initialState.app, action) {
@@ -24,6 +28,45 @@ function app(state = initialState.app, action) {
         loading: action.loadingState
       })
 
+    default:
+      return state
+  }
+}
+
+function envProps(state = [], action) {
+  switch (action.type) {
+    case UPDATE_EVERYTHING:
+      var newState = _.assign([], state);
+      for (var i=0; i < action.services.length; i++) {
+        if (!newState.some(function (e) { return e.name === action.services[i].env})) {
+          newState.push({"name" : action.services[i].env, "isOpen": true});
+        }
+      }
+      return newState
+    
+    case OPEN_ENV_CARD:
+      var newState = _.assign([], state);
+
+      if (action.env !== null && action.env !== undefined && action.env !== "") {
+        for (var i=0; i < newState.length; i++) {
+          if (newState[i].name == action.env) {
+            newState[i].isOpen = true
+          }
+        }
+      }
+      return newState
+
+    case CLOSE_ENV_CARD:
+      var newState = _.assign([], state);
+      if (action.env !== null && action.env !== undefined && action.env !== "") {
+        for (var i=0; i < newState.length; i++) {
+          if (newState[i].name == action.env) {
+            newState[i].isOpen = false
+          }
+        }
+      }
+      return newState
+    
     default:
       return state
   }
@@ -119,6 +162,7 @@ function services(state = [], action) {
 
 const softwareMapApp = combineReducers({
   app,
+  envProps,
   services
 })
 

@@ -24,6 +24,8 @@ export const OPEN_ALL_SERVICE_CARDS  = 'OPEN_ALL_SERVICE_CARDS'
 export const CLOSE_ALL_SERVICE_CARDS = 'CLOSE_ALL_SERVICE_CARDS'
 export const OPEN_ENV_SERVICE_CARDS  = 'OPEN_ENV_SERVICE_CARDS'
 export const CLOSE_ENV_SERVICE_CARDS = 'CLOSE_ENV_SERVICE_CARDS'
+export const OPEN_ENV_CARD           = 'OPEN_ENV_CARD'
+export const CLOSE_ENV_CARD          = 'CLOSE_ENV_CARD'
 
 export const OPEN_SERVICE_CARD   = 'OPEN_SERVICE_CARD'
 export const CLOSE_SERVICE_CARD = 'CLOSE_SERVICE_CARD'
@@ -49,6 +51,14 @@ export function openAllServiceCards() {
 
 export function closeAllServiceCards() {
   return { type: CLOSE_ALL_SERVICE_CARDS }
+}
+
+export function openEnvCard(env) {
+  return { type: OPEN_ENV_CARD, env }
+}
+
+export function closeEnvCard(env) {
+  return { type: CLOSE_ENV_CARD, env }
 }
 
 export function openEnvServiceCards(env) {

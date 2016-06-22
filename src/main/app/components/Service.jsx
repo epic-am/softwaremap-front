@@ -71,9 +71,9 @@ var Service = React.createClass({
 
     var openCloseCardButton;
     if (this.props.serv.card_open) {
-      openCloseCardButton = (<i className="serviceCardMaxMin material-icons md-48" onClick={e => this.props.closeCard()}>keyboard_arrow_up</i>)
+      openCloseCardButton = (<i className="serviceCardMaxMin material-icons md-48" title="Reduce service card" onClick={e => this.props.closeCard()}>fullscreen_exit</i>)
     } else {
-      openCloseCardButton = (<i className="serviceCardMaxMin material-icons md-48" onClick={e => this.props.openCard()}>keyboard_arrow_down</i>)
+      openCloseCardButton = (<i className="serviceCardMaxMin material-icons md-48" title="Maximize service card" onClick={e => this.props.openCard()}>fullscreen</i>)
     }
 
     var otherEnvButton = null;
