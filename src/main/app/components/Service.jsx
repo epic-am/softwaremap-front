@@ -67,6 +67,7 @@ var Service = React.createClass({
       cardContent = <div className="content" style={contentDisplayNone} />
       cardContainerClass = cardContainerClass + " closedCard"
     }
+    var cardId = this.props.serv.env+"-"+this.props.serv.name;
 
     var openCloseCardButton;
     if (this.props.serv.card_open) {
@@ -75,11 +76,20 @@ var Service = React.createClass({
       openCloseCardButton = (<i className="serviceCardMaxMin material-icons md-48" onClick={e => this.props.openCard()}>keyboard_arrow_down</i>)
     }
 
+    var otherEnvButton = null;
+    if(this.props.otherEnv && this.props.otherEnv.length > 0) {
+      otherEnvButton = (<li>
+        <a href="#otherEnv" data-toggle="tab" onClick={e => this.props.onTabChange(Constants.OTHERENV_SERVICE_TAB)}>
+          <i className="fa fa-2x fa-bar-chart material-icons" aria-hidden="true"></i>
+          &nbsp; Other Env
+        </a>
+      </li>)
+    }
+
     // In case any "ServiceGlobalValue" has a tooltip setting
     $('[data-toggle="tooltip"]').tooltip();
-
     return (
-      <div className="col-md-6">
+      <div className="col-md-6" id={cardId}>
         <div className={cardContainerClass}>
 
           <div className={healthHeaderClass}>
@@ -106,12 +116,7 @@ var Service = React.createClass({
                       &nbsp; Details
                     </a>
                   </li>
-                   <li>
-                    <a href="#otherEnv" data-toggle="tab" onClick={e => this.props.onTabChange(Constants.OTHERENV_SERVICE_TAB)}>
-                      <i className="fa fa-2x fa-bar-chart material-icons" aria-hidden="true"></i>
-                      &nbsp; Other Env
-                    </a>
-                  </li>
+                   {otherEnvButton}
                 </ul>
               </div>
             </div>

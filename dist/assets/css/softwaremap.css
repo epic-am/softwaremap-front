@@ -53,6 +53,10 @@
   cursor: default;
 }
 
+.tableOtherEnv tr.itemEnv {
+  cursor: pointer;
+}
+
 /* executor list */
 div.content.executor-list {
   max-height: 400px;

@@ -26,8 +26,6 @@ class ServiceContainer extends Component {
     this.props.dispatch(closeServiceCard(this.props.serv.id));
   }
 
-
-
   render() {
     return (
       <Service serv={this.props.serv} otherEnv={this.props.otherEnv} onTabChange={this.handleTabChange} openCard={this.handleCardOpen} closeCard={this.handleCardClose} />
