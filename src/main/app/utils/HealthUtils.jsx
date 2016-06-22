@@ -1,6 +1,7 @@
 var _ = require('lodash');
 
 var StatusUtils = require('./StatusUtils.jsx');
+var VersionUtils = require('./VersionUtils.jsx');
 var Constants = require('./Constants.jsx');
 
 /******************************************
