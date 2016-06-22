@@ -26,7 +26,7 @@ export function getServiceHealthFromExecutors (executors) {
   var status = VersionUtils.extractGlobalVersionFromExecutors(executors).status;
 
   if (status == Constants.NO_STATUS) {
-    return Constants.WARNING_STATUS;
+    return Constants.OK_STATUS;
   }
   if (status != Constants.OK_STATUS) {
     return status;
