@@ -30,13 +30,26 @@ class ServiceContainer extends Component {
 
   render() {
     return (
-      <Service serv={this.props.serv} onTabChange={this.handleTabChange} openCard={this.handleCardOpen} closeCard={this.handleCardClose} />
+      <Service serv={this.props.serv} otherEnv={this.props.otherEnv} onTabChange={this.handleTabChange} openCard={this.handleCardOpen} closeCard={this.handleCardClose} />
     )
   }
 }
 
 function mapStateToProps(state) {
+
+  var otherEnv = [];
+  if (this && this.props && this.props.serv) {
+    var current_service = this.props.serv;
+    for (var i=0; i < state.services.length; i++){
+      var service = state.services[i];
+      if (service.env != current_service.env && service.name == current_service.name) {
+        otherEnv.push(service)
+      }
+    }
+  }
+
   return {
+    "otherEnv" : otherEnv
   }
 }
 

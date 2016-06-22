@@ -1,6 +1,7 @@
 import React, { PropTypes }  from 'react';
 import ServiceGlobalValue from './ServiceGlobalValue.jsx';
 import ServiceDetails from './ServiceDetails.jsx';
+import ServiceOtherEnv from './ServiceOtherEnv.jsx'
 
 import ExecutorList from './ExecutorList.jsx';
 
@@ -36,6 +37,12 @@ var Service = React.createClass({
         case Constants.EXECUTORS_SERVICE_TAB:
           cardContent = (
             <div className="content executor-list"><ExecutorList servId={this.props.serv.id} executors={this.props.serv.executors} /></div>
+            )
+        break
+
+        case Constants.OTHERENV_SERVICE_TAB:
+          cardContent = (
+            <div className="content executor-list"><ServiceOtherEnv servId={this.props.serv.id} serv={this.props.serv} otherEnv={this.props.otherEnv} /></div>
             )
         break
 
@@ -97,6 +104,12 @@ var Service = React.createClass({
                     <a href="#details" data-toggle="tab" onClick={e => this.props.onTabChange(Constants.DETAILS_SERVICE_TAB)}>
                       <i className="fa fa-2x fa-info material-icons" aria-hidden="true"></i>
                       &nbsp; Details
+                    </a>
+                  </li>
+                   <li>
+                    <a href="#otherEnv" data-toggle="tab" onClick={e => this.props.onTabChange(Constants.OTHERENV_SERVICE_TAB)}>
+                      <i className="fa fa-2x fa-bar-chart material-icons" aria-hidden="true"></i>
+                      &nbsp; Other Env
                     </a>
                   </li>
                 </ul>
